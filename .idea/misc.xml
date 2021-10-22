@@ -3,14 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/iuyar/AndroidStudioProjects/CryptoExchange/app/src/main/res/drawable/bnv_tab_item_foreground.xml" value="0.17395833333333333" />
         <entry key="..\:/Users/iuyar/AndroidStudioProjects/CryptoExchange/app/src/main/res/drawable/button_corner_radius.xml" value="0.20052083333333334" />
         <entry key="..\:/Users/iuyar/AndroidStudioProjects/CryptoExchange/app/src/main/res/drawable/button_shape.xml" value="0.16145833333333334" />
+        <entry key="..\:/Users/iuyar/AndroidStudioProjects/CryptoExchange/app/src/main/res/drawable/ic_android_black_24dp.xml" value="0.17395833333333333" />
         <entry key="..\:/Users/iuyar/AndroidStudioProjects/CryptoExchange/app/src/main/res/layout-w1240dp/activity_login.xml" value="0.1" />
         <entry key="..\:/Users/iuyar/AndroidStudioProjects/CryptoExchange/app/src/main/res/layout-w936dp/activity_login.xml" value="0.1" />
         <entry key="..\:/Users/iuyar/AndroidStudioProjects/CryptoExchange/app/src/main/res/layout/activity_login.xml" value="0.25" />
-        <entry key="..\:/Users/iuyar/AndroidStudioProjects/CryptoExchange/app/src/main/res/layout/activity_main.xml" value="0.12760416666666666" />
+        <entry key="..\:/Users/iuyar/AndroidStudioProjects/CryptoExchange/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/iuyar/AndroidStudioProjects/CryptoExchange/app/src/main/res/layout/activity_register.xml" value="0.21" />
         <entry key="..\:/Users/iuyar/AndroidStudioProjects/CryptoExchange/app/src/main/res/layout/dialog_reset_password.xml" value="0.18" />
+        <entry key="..\:/Users/iuyar/AndroidStudioProjects/CryptoExchange/app/src/main/res/layout/fragment_home.xml" value="0.1578125" />
+        <entry key="..\:/Users/iuyar/AndroidStudioProjects/CryptoExchange/app/src/main/res/layout/fragment_trade.xml" value="0.1578125" />
+        <entry key="..\:/Users/iuyar/AndroidStudioProjects/CryptoExchange/app/src/main/res/layout/fragment_user.xml" value="0.1578125" />
+        <entry key="..\:/Users/iuyar/AndroidStudioProjects/CryptoExchange/app/src/main/res/menu/nav_menu.xml" value="0.1578125" />
       </map>
     </option>
   </component>

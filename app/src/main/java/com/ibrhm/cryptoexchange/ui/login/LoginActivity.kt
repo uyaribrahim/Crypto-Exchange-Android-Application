@@ -13,6 +13,7 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.Toast
+import com.ibrhm.cryptoexchange.MainActivity
 import com.ibrhm.cryptoexchange.databinding.ActivityLoginBinding
 
 import com.ibrhm.cryptoexchange.R
@@ -29,6 +30,11 @@ class LoginActivity : AppCompatActivity() {
 
         binding.btnRegister?.setOnClickListener{
             val intent = Intent(this,RegisterActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.btnLogin?.setOnClickListener {
+            val intent = Intent(this,MainActivity::class.java)
             startActivity(intent)
         }
     }
