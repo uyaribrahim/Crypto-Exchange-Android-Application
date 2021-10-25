@@ -9,38 +9,22 @@
         android:id="@+id/homeFragment"
         android:name="com.ibrhm.cryptoexchange.view.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/action_homeFragment_to_marketFragment"
-            app:destination="@id/marketFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/marketFragment"
         android:name="com.ibrhm.cryptoexchange.view.MarketFragment"
         android:label="fragment_market"
-        tools:layout="@layout/fragment_market" >
-        <action
-            android:id="@+id/action_marketFragment_to_tradeFragment"
-            app:destination="@id/tradeFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_market" />
     <fragment
         android:id="@+id/tradeFragment"
         android:name="com.ibrhm.cryptoexchange.view.TradeFragment"
         android:label="fragment_trade"
-        tools:layout="@layout/fragment_trade" >
-        <action
-            android:id="@+id/action_tradeFragment_to_walletFragment"
-            app:destination="@id/walletFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_trade" />
     <fragment
         android:id="@+id/walletFragment"
         android:name="com.ibrhm.cryptoexchange.view.WalletFragment"
         android:label="fragment_wallet"
-        tools:layout="@layout/fragment_wallet" >
-        <action
-            android:id="@+id/action_walletFragment_to_userFragment"
-            app:destination="@id/userFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_wallet" />
     <fragment
         android:id="@+id/userFragment"
         android:name="com.ibrhm.cryptoexchange.view.UserFragment"
