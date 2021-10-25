@@ -76,7 +76,7 @@ class MarketFragment : Fragment() {
                                                    coinArrayList.add(CoinModel(name,symbol,price,volume_24h,percent_change))
                                                }
                                                marketProgressBar.visibility = View.GONE
-                                               coinAdapter.updateList(coinArrayList)
+                                               coinAdapter.updateList(coinArrayList,this.context)
                                            }
                                            catch (e: JSONException){
                                                e.printStackTrace()

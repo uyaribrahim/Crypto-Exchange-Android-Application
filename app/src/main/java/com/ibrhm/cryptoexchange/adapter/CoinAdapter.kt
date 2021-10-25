@@ -1,11 +1,14 @@
 package com.ibrhm.cryptoexchange.adapter
 
+import android.app.Application
 import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.ibrhm.cryptoexchange.Constants
 import com.ibrhm.cryptoexchange.R
 import com.ibrhm.cryptoexchange.model.CoinModel
 import kotlinx.android.synthetic.main.item_coin.view.*
@@ -15,6 +18,9 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class CoinAdapter(val coinList: ArrayList<CoinModel>): RecyclerView.Adapter<CoinAdapter.CoinViewHolder>() {
+
+    private var coinImgUrl: Array<String> = Constants.coinImageUrlList
+    private var context: Context? = null
 
     private var decimalFormat: DecimalFormat = DecimalFormat("#.##")
     private var numberFormat = NumberFormat.getCurrencyInstance(Locale.US)
@@ -30,6 +36,15 @@ class CoinAdapter(val coinList: ArrayList<CoinModel>): RecyclerView.Adapter<Coin
     }
 
     override fun onBindViewHolder(holder: CoinViewHolder, position: Int) {
+
+        if (position <= 29){
+            var url = coinImgUrl[position]
+            Glide
+                .with(context!!)
+                .load(url)
+                .circleCrop()
+                .into(holder.view.coinImage)
+        }
 
         var coin: CoinModel = coinList[position]
         holder.view.txtCoinName.text = coin.name
@@ -50,7 +65,8 @@ class CoinAdapter(val coinList: ArrayList<CoinModel>): RecyclerView.Adapter<Coin
     override fun getItemCount(): Int {
         return coinList.size
     }
-    fun updateList(newCoinList: ArrayList<CoinModel>){
+    fun updateList(newCoinList: ArrayList<CoinModel>, context: Context?){
+        this.context = context
         coinList.clear()
         coinList.addAll(newCoinList)
         notifyDataSetChanged()
