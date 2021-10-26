@@ -19,7 +19,6 @@ import kotlin.collections.ArrayList
 
 class CoinAdapter(val coinList: ArrayList<CoinModel>): RecyclerView.Adapter<CoinAdapter.CoinViewHolder>() {
 
-    private var coinImgUrl: Array<String> = Constants.coinImageUrlList
     private var context: Context? = null
 
     private var decimalFormat: DecimalFormat = DecimalFormat("#.##")
@@ -37,19 +36,25 @@ class CoinAdapter(val coinList: ArrayList<CoinModel>): RecyclerView.Adapter<Coin
 
     override fun onBindViewHolder(holder: CoinViewHolder, position: Int) {
 
-        if (position <= 29){
-            var url = coinImgUrl[position]
+        var coin: CoinModel = coinList[position]
+
+        if(Constants.hashMap.containsKey(coin.symbol)){
+            val url = Constants.hashMap[coin.symbol]
             Glide
                 .with(context!!)
                 .load(url)
                 .circleCrop()
                 .into(holder.view.coinImage)
         }
-
-        var coin: CoinModel = coinList[position]
+        if(coin.symbol == "SHIB" || coin.symbol == "XEC"){
+            numberFormat.maximumFractionDigits = 6
+            holder.view.coinPrice.text = numberFormat.format(coin.price)
+        }else{
+            numberFormat.maximumFractionDigits = 2
+            holder.view.coinPrice.text = numberFormat.format(coin.price)
+        }
         holder.view.txtCoinName.text = coin.name
         holder.view.txtCoinSymbol.text = coin.symbol
-        holder.view.coinPrice.text = "$" + decimalFormat.format(coin.price)
         holder.view.txtPercentChange24h.text = decimalFormat.format(coin.percent_change_24h) + "%"
         numberFormat.maximumFractionDigits = 0
         var volume = numberFormat.format(coin.volume_24h)
