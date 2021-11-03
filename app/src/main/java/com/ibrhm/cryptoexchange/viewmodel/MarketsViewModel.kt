@@ -10,9 +10,13 @@ class MarketsViewModel: ViewModel() {
     private var repository: Repository = Repository()
 
     var coinList: MutableLiveData<ArrayList<CoinModel>> = repository.getCoinMutableLiveData()
+    var searchCurrencyList: MutableLiveData<ArrayList<CoinModel>> = repository.getSearchCurrencyLiveData()
     var loading: MutableLiveData<Boolean> = repository.getLoading()
 
     fun getCurrencyData(){
         repository.getCurrencyData()
+    }
+    fun searchCurrency(key: String){
+        repository.searchCurrency(key)
     }
 }
