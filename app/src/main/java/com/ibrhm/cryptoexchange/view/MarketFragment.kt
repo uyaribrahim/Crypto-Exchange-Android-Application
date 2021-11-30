@@ -43,9 +43,7 @@ class MarketFragment : Fragment() {
         marketCoinRecyclerView.layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
         marketCoinRecyclerView.adapter = coinAdapter
 
-        marketViewModel = ViewModelProvider(this).get(MarketsViewModel::class.java)
-
-        marketViewModel.getCurrencyData()
+        marketViewModel = ViewModelProvider(requireActivity()).get(MarketsViewModel::class.java)
 
         observeLiveData()
 
@@ -82,7 +80,7 @@ class MarketFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_market, container, false)
     }
 
-    fun observeLiveData(){
+    private fun observeLiveData(){
         marketViewModel.coinList.observe(viewLifecycleOwner, Observer {
             coinAdapter.updateList(it,this.context)
         })
@@ -95,7 +93,7 @@ class MarketFragment : Fragment() {
             }
         })
 
-        marketViewModel.searchCurrencyList.observe(viewLifecycleOwner, Observer {
+        marketViewModel.searchCurrencyList.observe(viewLifecycleOwner, {
             coinAdapter.updateList(it,this.context)
         })
     }
