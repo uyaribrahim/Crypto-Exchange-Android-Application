@@ -1,6 +1,7 @@
 package com.ibrhm.cryptoexchange.repository
 
 import android.app.Application
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -23,6 +24,19 @@ class FirebaseAuthRepo {
         if (firebaseAuth.currentUser != null) {
             userLiveData.postValue(firebaseAuth.currentUser)
             loggedOutLiveData.postValue(false)
+        }
+    }
+
+    fun register(email: String, password: String){
+
+        firebaseAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener {
+            if(it.isSuccessful){
+                userLiveData.postValue(firebaseAuth.currentUser)
+            }else{
+                Toast.makeText(application.applicationContext,
+                    "Authentication failed: " + it.exception?.message,
+                    Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
