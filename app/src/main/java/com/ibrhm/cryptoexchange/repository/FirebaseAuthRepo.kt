@@ -40,6 +40,24 @@ class FirebaseAuthRepo {
         }
     }
 
+    fun login(email: String, password: String){
+
+        firebaseAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener {
+            if(it.isSuccessful){
+                userLiveData.postValue(firebaseAuth.currentUser)
+            }else{
+                Toast.makeText(application.applicationContext,
+                    "Authentication failed: " + it.exception?.message,
+                Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    fun logOut(){
+        firebaseAuth.signOut()
+        loggedOutLiveData.postValue(true)
+    }
+
     fun getUserLiveData(): MutableLiveData<FirebaseUser> {
         return userLiveData
     }
