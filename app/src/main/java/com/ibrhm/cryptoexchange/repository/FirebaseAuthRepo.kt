@@ -10,12 +10,12 @@ import com.google.firebase.ktx.Firebase
 
 class FirebaseAuthRepo {
 
-    private lateinit var application: Application
-    private lateinit var firebaseAuth: FirebaseAuth
-    private lateinit var userLiveData: MutableLiveData<FirebaseUser>
-    private lateinit var loggedOutLiveData: MutableLiveData<Boolean>
+    private var application: Application = Application()
+    private var firebaseAuth: FirebaseAuth
+    private var userLiveData: MutableLiveData<FirebaseUser>
+    private var loggedOutLiveData: MutableLiveData<Boolean>
 
-    fun FirebaseAuthRepo(application: Application) {
+     constructor(application: Application) {
         this.application = application
         this.firebaseAuth = FirebaseAuth.getInstance()
         this.userLiveData = MutableLiveData()
