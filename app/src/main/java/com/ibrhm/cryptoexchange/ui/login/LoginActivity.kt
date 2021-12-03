@@ -39,7 +39,7 @@ class LoginActivity : AppCompatActivity() {
 
         binding.btnLogin?.setOnClickListener {
             var email: String = binding.username.text.toString()
-            var password: String = binding.username.text.toString()
+            var password: String = binding.password.text.toString()
 
             if(email.isNotEmpty() && password.isNotEmpty()){
                 loginRegisterViewModel.login(email,password)
