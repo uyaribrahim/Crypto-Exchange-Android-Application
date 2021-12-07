@@ -38,15 +38,14 @@ class CoinAdapter(val coinList: ArrayList<CoinModel>): RecyclerView.Adapter<Coin
 
         var coin: CoinModel = coinList[position]
 
-        if(Constants.hashMap.containsKey(coin.symbol)){
-            val url = Constants.hashMap[coin.symbol]
-            Glide
-                .with(context!!)
-                .load(url)
-                .circleCrop()
-                .into(holder.view.coinImage)
-        }
-        if(coin.symbol == "SHIB" || coin.symbol == "XEC"){
+        Glide
+            .with(context!!)
+            .load(coin.image_url)
+            .circleCrop()
+            .fitCenter()
+            .into(holder.view.coinImage)
+
+        if(coin.symbol == "SHIB" || coin.symbol == "ATLAS"){
             numberFormat.maximumFractionDigits = 6
             holder.view.coinPrice.text = numberFormat.format(coin.price)
         }else{
