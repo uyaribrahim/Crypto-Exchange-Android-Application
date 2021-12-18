@@ -198,49 +198,43 @@
                 android:layout_marginTop="5dp"
                 >
 
-                <Button
-                    android:id="@+id/btnLosers"
-                    android:layout_width="77dp"
-                    android:layout_height="35dp"
-                    android:text="Losers"
-                    android:textSize="10sp"
-                    android:textColor="@color/text_color"
-                    android:gravity="center"
+                <LinearLayout
+                    android:id="@+id/linearLayoutBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
                     android:layout_centerHorizontal="true"
-                    android:textAllCaps="false"
-                    android:backgroundTint="@color/background_color"/>
+                    >
+                    <Button
+                        android:id="@+id/btnWinners"
+                        android:layout_width="77dp"
+                        android:layout_height="35dp"
+                        android:layout_marginRight="4dp"
+                        android:layout_toLeftOf="@id/btnLosers"
+                        android:backgroundTint="@color/background_color"
+                        android:gravity="center"
+                        android:text="Winners"
+                        android:textAllCaps="false"
+                        android:textColor="@color/text_color"
+                        android:textSize="10sp" />
+                    <Button
+                        android:id="@+id/btnLosers"
+                        android:layout_width="77dp"
+                        android:layout_height="35dp"
+                        android:layout_alignParentRight="true"
+                        android:backgroundTint="@color/background_color"
+                        android:gravity="center"
+                        android:text="Losers"
+                        android:textAllCaps="false"
+                        android:textColor="@color/text_color"
+                        android:textSize="10sp" />
 
-                <Button
-                    android:id="@+id/btnWinners"
-                    android:layout_width="77dp"
-                    android:layout_height="35dp"
-                    android:text="Winners"
-                    android:textSize="10sp"
-                    android:textColor="@color/text_color"
-                    android:gravity="center"
-                    android:textAllCaps="false"
-                    android:layout_toLeftOf="@id/btnLosers"
-                    android:layout_marginRight="4dp"
-                    android:backgroundTint="@color/background_color"/>
-
-                <Button
-                    android:id="@+id/btnVolume"
-                    android:layout_width="77dp"
-                    android:layout_height="35dp"
-                    android:text="Volume"
-                    android:textSize="10sp"
-                    android:textColor="@color/text_color"
-                    android:gravity="center"
-                    android:textAllCaps="false"
-                    android:layout_toRightOf="@id/btnLosers"
-                    android:layout_marginLeft="4dp"
-                    android:backgroundTint="@color/background_color"/>
-
+                </LinearLayout>
                 <RelativeLayout
                     android:id="@+id/titleRelativeLayout"
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
-                    android:layout_below="@id/btnLosers"
+                    android:layout_below="@id/linearLayoutBtn"
                     android:layout_marginTop="15dp"
                     >
 
@@ -255,7 +249,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="20dp"
+                        android:layout_marginRight="28dp"
                         android:layout_toLeftOf="@id/textViewPrice"
                         android:text="Price"
                         android:textColor="@color/text_color"
@@ -281,19 +275,16 @@
                 </RelativeLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvRankingList"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:layout_below="@id/titleRelativeLayout"
-                    android:layout_marginHorizontal="15dp" />
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/titleRelativeLayout" />
 
 
 
             </RelativeLayout>
 
         </androidx.cardview.widget.CardView>
-
-
-
 
     </RelativeLayout>
 

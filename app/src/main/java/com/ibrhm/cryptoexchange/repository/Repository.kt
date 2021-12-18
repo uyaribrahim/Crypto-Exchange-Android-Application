@@ -13,12 +13,15 @@ import kotlin.collections.ArrayList
 
 class Repository {
 
-    val database = Firebase.database
-    val currencyRef = database.getReference("coin")
+    private val database = Firebase.database
+    private val currencyRef = database.getReference("coin")
 
     private var coinMutableLiveData: MutableLiveData<ArrayList<CoinModel>> = MutableLiveData()
     private var loading: MutableLiveData<Boolean> = MutableLiveData()
     private var searchCurrencyLiveData: MutableLiveData<ArrayList<CoinModel>> = MutableLiveData()
+    private var rankedListLiveData: MutableLiveData<ArrayList<CoinModel>> = MutableLiveData()
+    //if rankOption is true, list winners. is it false then list losers
+    private var rankOption: MutableLiveData<Boolean> = MutableLiveData(true)
 
     private var emptyArrayList: ArrayList<CoinModel> = ArrayList()
 
@@ -54,12 +57,33 @@ class Repository {
                 coinMutableLiveData.postValue(list)
 
             }
-
             override fun onCancelled(error: DatabaseError) {
-
             }
-
         })
+    }
+
+    fun setRankOption(){
+        if (rankOption.value == false){
+            rankOption.value = true
+            sortRankingListByOption()
+        }else{
+            rankOption.value = false
+            sortRankingListByOption()
+        }
+
+    }
+    fun sortRankingListByOption(){
+        val list = coinMutableLiveData.value!!
+        var sortedList: List<CoinModel>
+        if(rankOption.value == true){
+            sortedList =  list.sortedWith(compareByDescending { it.percent_change_24h })
+            sortedList = sortedList.take(6)
+            rankedListLiveData.postValue(sortedList as ArrayList<CoinModel>?)
+        }else{
+            sortedList =  list.sortedWith(compareBy { it.percent_change_24h })
+            sortedList = sortedList.take(6)
+            rankedListLiveData.postValue(sortedList as ArrayList<CoinModel>?)
+        }
     }
 
     fun getSearchCurrencyLiveData(): MutableLiveData<ArrayList<CoinModel>>{
@@ -70,5 +94,11 @@ class Repository {
     }
     fun getLoading(): MutableLiveData<Boolean>{
         return loading
+    }
+    fun getRankedListLiveData(): MutableLiveData<ArrayList<CoinModel>>{
+        return rankedListLiveData
+    }
+    fun getRankOption(): MutableLiveData<Boolean>{
+        return rankOption
     }
 }

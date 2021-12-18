@@ -11,6 +11,8 @@ class MarketsViewModel: ViewModel() {
 
     var coinList: MutableLiveData<ArrayList<CoinModel>> = repository.getCoinMutableLiveData()
     var searchCurrencyList: MutableLiveData<ArrayList<CoinModel>> = repository.getSearchCurrencyLiveData()
+    var rankedList: MutableLiveData<ArrayList<CoinModel>> = repository.getRankedListLiveData()
+    var rankOptions: MutableLiveData<Boolean> = repository.getRankOption()
     var loading: MutableLiveData<Boolean> = repository.getLoading()
 
     fun getCurrencyData(){
@@ -19,4 +21,13 @@ class MarketsViewModel: ViewModel() {
     fun searchCurrency(key: String){
         repository.searchCurrency(key)
     }
+
+    fun setRankOption(){
+        repository.setRankOption()
+    }
+
+    fun sortRankingListByOption(){
+        repository.sortRankingListByOption()
+    }
+
 }
