@@ -25,7 +25,7 @@
         <EditText
             android:id="@+id/marketSearchBar"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="48dp"
             android:layout_below="@id/marketTitle"
             android:layout_marginHorizontal="30dp"
             android:layout_marginTop="15dp"
@@ -103,7 +103,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/coinNameVolume"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            android:layoutAnimation="@anim/layout_animation"/>
 
         <ProgressBar
             android:id="@+id/marketProgressBar"

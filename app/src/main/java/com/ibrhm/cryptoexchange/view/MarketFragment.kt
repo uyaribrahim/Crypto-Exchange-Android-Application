@@ -46,6 +46,7 @@ class MarketFragment : Fragment() {
         marketViewModel = ViewModelProvider(requireActivity()).get(MarketsViewModel::class.java)
 
         observeLiveData()
+        marketCoinRecyclerView.startLayoutAnimation()
 
         marketSearchBar.addTextChangedListener(object: TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
