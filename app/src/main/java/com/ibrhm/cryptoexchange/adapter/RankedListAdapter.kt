@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.ibrhm.cryptoexchange.R
 import com.ibrhm.cryptoexchange.model.CoinModel
-import kotlinx.android.synthetic.main.item_coin.view.*
+import com.ibrhm.cryptoexchange.viewmodel.SharedViewModel
 import kotlinx.android.synthetic.main.item_ranking_list.view.*
 import kotlinx.android.synthetic.main.item_ranking_list.view.coinPrice
 import kotlinx.android.synthetic.main.item_ranking_list.view.txtCoinSymbol
@@ -24,6 +24,8 @@ class RankedListAdapter(val rankedList: ArrayList<CoinModel>):
     RecyclerView.Adapter<RankedListAdapter.RankedListViewHolder>() {
 
     private lateinit var context: Context
+    private var marketViewModel: SharedViewModel? = null
+
     private var decimalFormat: DecimalFormat = DecimalFormat("#.##")
     private var numberFormat = NumberFormat.getCurrencyInstance(Locale.US)
 
@@ -58,16 +60,22 @@ class RankedListAdapter(val rankedList: ArrayList<CoinModel>):
         holder.itemView.txtCoinSymbol.text = coin.symbol + "/USD"
         holder.itemView.coinPrice.text = numberFormat.format(coin.price)
         holder.itemView.txtPercentChange24h.text = decimalFormat.format(coin.percent_change_24h) +"%"
+
+        holder.itemView.setOnClickListener {
+            marketViewModel?.selectedItem?.value = coin.symbol.toString()
+            marketViewModel?.clickToItem?.value = true
+        }
     }
 
     override fun getItemCount(): Int {
         return rankedList.size
     }
 
-    fun updateList(newCoinList: ArrayList<CoinModel>, context: Context){
+    fun updateList(newCoinList: ArrayList<CoinModel>, context: Context,viewModel: SharedViewModel){
         this.context = context
         rankedList.clear()
         rankedList.addAll(newCoinList)
+        marketViewModel = viewModel
         notifyDataSetChanged()
     }
 }

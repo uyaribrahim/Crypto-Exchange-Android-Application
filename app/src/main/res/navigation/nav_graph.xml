@@ -9,12 +9,20 @@
         android:id="@+id/homeFragment"
         android:name="com.ibrhm.cryptoexchange.view.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_tradeFragment2"
+            app:destination="@id/tradeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/marketFragment"
         android:name="com.ibrhm.cryptoexchange.view.MarketFragment"
         android:label="fragment_market"
-        tools:layout="@layout/fragment_market" />
+        tools:layout="@layout/fragment_market" >
+        <action
+            android:id="@+id/action_marketFragment_to_tradeFragment"
+            app:destination="@id/tradeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/tradeFragment"
         android:name="com.ibrhm.cryptoexchange.view.TradeFragment"

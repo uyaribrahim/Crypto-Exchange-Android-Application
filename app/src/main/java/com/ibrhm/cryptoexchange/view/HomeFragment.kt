@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ibrhm.cryptoexchange.R
 import com.ibrhm.cryptoexchange.adapter.RankedListAdapter
 import com.ibrhm.cryptoexchange.model.CoinModel
-import com.ibrhm.cryptoexchange.viewmodel.MarketsViewModel
+import com.ibrhm.cryptoexchange.viewmodel.SharedViewModel
 import kotlinx.android.synthetic.main.fragment_home.*
 import java.text.NumberFormat
 import java.util.*
@@ -20,7 +20,7 @@ import kotlin.collections.ArrayList
 
 class HomeFragment : Fragment() {
 
-    private lateinit var marketViewModel: MarketsViewModel
+    private lateinit var sharedViewModel: SharedViewModel
     private var numberFormat = NumberFormat.getCurrencyInstance(Locale.US)
     private var newList: ArrayList<CoinModel> = ArrayList()
 
@@ -35,17 +35,17 @@ class HomeFragment : Fragment() {
         rvRankingList.layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
         rvRankingList.adapter = rankedListAdapter
 
-        marketViewModel = ViewModelProvider(requireActivity()).get(MarketsViewModel::class.java)
+        sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
 
-        marketViewModel.getCurrencyData()
+        //marketViewModel.getCurrencyData()
 
         btnWinners.isEnabled = false
         btnWinners.setOnClickListener {
-            marketViewModel.setRankOption()
+            sharedViewModel.setRankOption()
             it.isEnabled = false
         }
         btnLosers.setOnClickListener {
-            marketViewModel.setRankOption()
+            sharedViewModel.setRankOption()
             it.isEnabled = false
         }
 
@@ -53,7 +53,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun observeLiveData(){
-        marketViewModel.coinList.observe(viewLifecycleOwner, Observer {
+        sharedViewModel.coinList.observe(viewLifecycleOwner, Observer {
 
             newList = it.filter { it ->
                 it.symbol?.lowercase()?.equals("btc") == true ||
@@ -69,22 +69,26 @@ class HomeFragment : Fragment() {
             eth_volume.text = numberFormat.format(newList[1].volume_24h)
             sol_volume.text = numberFormat.format(newList[2].volume_24h)
 
-            marketViewModel.sortRankingListByOption()
+            sharedViewModel.sortRankingListByOption()
         })
 
-        marketViewModel.rankedList.observe(viewLifecycleOwner, Observer {
-            context?.let { mContext -> rankedListAdapter.updateList(it, mContext) }
+        sharedViewModel.rankedList.observe(viewLifecycleOwner, Observer {
+            context?.let { mContext -> rankedListAdapter.updateList(it, mContext,sharedViewModel) }
         })
 
-        marketViewModel.rankOptions.observe(viewLifecycleOwner, Observer {
+        sharedViewModel.rankOptions.observe(viewLifecycleOwner, Observer {
             if(it == true){
                 btnLosers.isEnabled = true
                 btnWinners.setTextColor(Color.parseColor("#ffffff"))
+                btnWinners.backgroundTintList = this.context?.resources?.getColorStateList(R.color.active_btn)
                 btnLosers.setTextColor(Color.parseColor("#9195a1"))
+                btnLosers.backgroundTintList = this.context?.resources?.getColorStateList(R.color.background_color)
             }else{
                 btnWinners.isEnabled = true
                 btnLosers.setTextColor(Color.parseColor("#ffffff"))
+                btnLosers.backgroundTintList = this.context?.resources?.getColorStateList(R.color.active_btn)
                 btnWinners.setTextColor(Color.parseColor("#9195a1"))
+                btnWinners.backgroundTintList = this.context?.resources?.getColorStateList(R.color.background_color)
             }
         })
     }
@@ -97,4 +101,9 @@ class HomeFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        rvRankingList.adapter = null
+    }
 }

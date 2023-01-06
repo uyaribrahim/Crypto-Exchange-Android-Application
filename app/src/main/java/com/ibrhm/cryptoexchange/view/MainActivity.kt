@@ -11,12 +11,13 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ibrhm.cryptoexchange.R
 import com.ibrhm.cryptoexchange.ui.login.LoginActivity
-import com.ibrhm.cryptoexchange.ui.login.RegisterActivity
 import com.ibrhm.cryptoexchange.viewmodel.LoggedInViewModel
+import com.ibrhm.cryptoexchange.viewmodel.SharedViewModel
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var loggedInViewModel: LoggedInViewModel
+    private lateinit var sharedViewModel: SharedViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +30,15 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView.setupWithNavController(navController)
 
         loggedInViewModel = ViewModelProvider(this).get(LoggedInViewModel::class.java)
+        sharedViewModel = ViewModelProvider(this).get(SharedViewModel::class.java)
+        sharedViewModel.getCurrencyData()
+        sharedViewModel.getUserData()
+
+        sharedViewModel.clickToItem.observe(this, Observer {
+            if (it){
+                bottomNavigationView.selectedItemId = R.id.tradeFragment
+            }
+        })
 
         loggedInViewModel.getLoggetOutLiveData().observe(this, Observer {
             if (it){

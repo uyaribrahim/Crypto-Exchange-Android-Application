@@ -1,6 +1,5 @@
 package com.ibrhm.cryptoexchange.adapter
 
-import android.app.Application
 import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
@@ -8,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.ibrhm.cryptoexchange.Constants
 import com.ibrhm.cryptoexchange.R
 import com.ibrhm.cryptoexchange.model.CoinModel
 import kotlinx.android.synthetic.main.item_coin.view.*
@@ -16,13 +14,17 @@ import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.util.*
 import kotlin.collections.ArrayList
+import com.ibrhm.cryptoexchange.viewmodel.SharedViewModel
+
 
 class CoinAdapter(val coinList: ArrayList<CoinModel>): RecyclerView.Adapter<CoinAdapter.CoinViewHolder>() {
 
     private var context: Context? = null
+    private var marketViewModel: SharedViewModel? = null
 
     private var decimalFormat: DecimalFormat = DecimalFormat("#.##")
     private var numberFormat = NumberFormat.getCurrencyInstance(Locale.US)
+
 
     class CoinViewHolder(var view: View): RecyclerView.ViewHolder(view) {
 
@@ -64,15 +66,21 @@ class CoinAdapter(val coinList: ArrayList<CoinModel>): RecyclerView.Adapter<Coin
         }else{
             holder.view.txtPercentChange24h.setTextColor(Color.RED)
         }
+
+        holder.view.setOnClickListener {
+            marketViewModel?.selectedItem?.value = coin.symbol.toString()
+            marketViewModel?.clickToItem?.value = true
+        }
     }
 
     override fun getItemCount(): Int {
         return coinList.size
     }
-    fun updateList(newCoinList: ArrayList<CoinModel>, context: Context?){
+    fun updateList(newCoinList: ArrayList<CoinModel>, context: Context?, viewModel: SharedViewModel){
         this.context = context
         coinList.clear()
         coinList.addAll(newCoinList)
+        marketViewModel = viewModel
         notifyDataSetChanged()
     }
 }
